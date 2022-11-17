@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import Button from "../components/Button";
 import {useState} from "react";
 
-
+if (0) console.log(Content);
 const vocabularies = [
   {
     word: "knotty",
@@ -38,36 +38,16 @@ function FlashCard() {
 
   const [openExample, setOpenExample] = useState ([]);
 
-
   const handleStarClick = (event) => { };
+  if (0) console.log(handleStarClick);
 
-  const handleExampleClick = (list_of_example) => {
-    console.log(openExample);
-    console.log("openExample[0]", openExample[0]);
-    console.log("openExample[1]", openExample[1]);
-    console.log("openExample[2]", openExample[2]);
-    console.log("openExample[3]", openExample[3]);
-    setOpenExample(list_of_example);
+  const handleExampleClick = (index, example) => {
+    let current = [...openExample];
+    current[index] = example;
+    setOpenExample(current);
   };
+  
 
-//  const handleExampleClick_ver2 = (input) => {
-
-    // console.log(input);
-//    let current = openExample; // 拿點名表
-//    console.log(current[input]);
-//    if (current[input] === true) {
-//      current[input] = false; // 點名
-
-//    }
-//    else {
-//      current[input] = true; // 點名
-
-//    }
-    /* openExample = current; */ //setOpenExample(current);  // 還給老師
-
-//    console.log(openExample);
-
-//  };
 
   return (
     <div>
@@ -75,7 +55,6 @@ function FlashCard() {
       {vocabularies.map((v, index) => { 
    
           
-          // event => handleExampleClick_ver2(v.word);
         return (
         <div className="card" key={index}>
           <Card word={v.word}
@@ -83,12 +62,10 @@ function FlashCard() {
             definition={v.definition}
           />
           <Button className="example-button" text="Example" onClick={
-            event => handleExampleClick([v.example])
-
+            event => handleExampleClick(index, v.example)
            }
           />
-          {/* <span>{openExample[index]}</span> */}
-          <span>openExample[{index}]: {openExample[index]}</span>
+          <span>{openExample[index]}</span>
 
         </div>
         ); })
